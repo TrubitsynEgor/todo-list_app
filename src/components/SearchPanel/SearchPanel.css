@@ -1,0 +1,13 @@
+.search-panel {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+	padding-bottom: 20px;
+	
+}
+.search-panel__input {
+	flex: 1 0 60%;
+}
+
+
+

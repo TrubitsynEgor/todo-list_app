@@ -1,0 +1,15 @@
+.header {
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	padding-bottom: 20px;
+	
+}
+.header__title{
+	font-size: 55px;
+}
+.header__status{
+	font-size: 16px;
+	color: grey;
+	align-self: flex-end;
+}

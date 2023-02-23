@@ -1,0 +1,50 @@
+.todo-list-item {
+	font-size: 1.5rem;
+	padding-left: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	
+}
+
+
+.todo-list-item__svg{
+	display: flex;
+	gap: 5px;
+}
+.todo-list-item__btn {
+	padding: 10px;
+	border: 1px solid red;
+	border-radius: 4px;
+
+}
+.todo-list-item__btn:hover {
+	background-color: red;
+
+}
+.todo-list-item__btn:hover svg {
+	fill: white;
+
+}
+.todo-list-item svg {
+	width: 20px;
+	height: 20px;
+	fill: red;
+}
+.todo-list-item__btn:last-child {
+	border-color: green;
+}
+.todo-list-item__btn:last-child svg {
+	fill: green;
+}
+.todo-list-item__btn:last-child:hover {
+	background-color: green;
+	
+}
+.todo-list-item__btn:last-child:hover svg {
+	fill: white;
+}
+
+
+
+	
