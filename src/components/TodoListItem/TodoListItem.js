@@ -8,34 +8,43 @@ export default class TodoListItem extends Component {
 
 		this.state = {
 			done: false,
+			important: false,
 		};
 
 		this.onLabelClick = () => {
-			this.setState({
-				done: true,
+			this.setState(({ done }) => {
+				return {
+					done: !done
+				}
 			})
 		};
+		this.onMarkImportant = () => {
+			this.setState(({ important }) => {
+				return {
+					important: !important
+				}
+			})
+		};
+
 	};
 
 
 	render() {
-		const { label, important = false } = this.props;
-		const { done } = this.state;
+		const { label } = this.props;
+		const { done, important } = this.state;
 
 		let classNames = 'todo-list-item';
 		if (done) {
 			classNames += ' done'
 		}
-
-		const style = {
-			color: important ? 'tomato' : 'Grey',
-			fontWeight: important ? '600' : '400'
+		if (important) {
+			classNames += ' important'
 		}
+
 		return (
 			<span className={classNames}>
 				<span
 					className="todo-list-item-label "
-					style={style}
 					onClick={this.onLabelClick}>
 					{label}
 				</span>
@@ -50,7 +59,7 @@ export default class TodoListItem extends Component {
 						</svg>
 					</button>
 
-					<button className='todo-list-item__btn btn'>
+					<button className='todo-list-item__btn btn' onClick={this.onMarkImportant}>
 						<svg xmlns="http://www.w3.org/2000/svg" className="bi bi-exclamation-lg todo-list-item__svg" viewBox="0 0 16 16">
 							<path d="M7.005 3.1a1 1 0 1 1 1.99 0l-.388 6.35a.61.61 0 0 1-1.214 0L7.005 3.1ZM7 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0Z" />
 						</svg>
