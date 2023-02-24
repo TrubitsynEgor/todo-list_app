@@ -2,12 +2,15 @@ import React, { Component } from 'react';
 import TodoList from './components/TodoList';
 import AppHeader from './components/AppHeader';
 import SearchPanel from './components/SearchPanel';
+import AddItem from './components/AddItem'
 import './App.css'
 
 export default class App extends Component {
 
 	constructor() {
 		super();
+
+		this.maxId = 100;
 
 		this.state = {
 			todoData: [
@@ -27,6 +30,20 @@ export default class App extends Component {
 				return { todoData: newArray }
 			})
 		}
+
+		this.addItem = (text) => {
+			const newItem = {
+				label: text,
+				important: false,
+				id: this.maxId++
+			};
+			console.log(newItem.id);
+			this.setState(({ todoData }) => {
+				const newArray = [...todoData, newItem]
+				return { todoData: newArray };
+			})
+		};
+
 	}
 
 
@@ -39,6 +56,7 @@ export default class App extends Component {
 				<AppHeader />
 				<SearchPanel />
 				<TodoList todos={todoData} onDeleted={this.deleteItem} />
+				<AddItem onItemAdded={this.addItem} />
 			</div>
 		)
 	}
