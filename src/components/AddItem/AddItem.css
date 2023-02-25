@@ -1,9 +1,8 @@
 .add-item {
-	margin: 0 auto;
-	
-	max-width: 200px;
+	gap: 20px;
 	
 }
-.add-item-btn{
-
- }
+.add-item__btn {
+	flex: 1 0 20%;
+	padding: 5px;
+}
