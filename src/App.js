@@ -3,6 +3,8 @@ import TodoList from './components/TodoList';
 import AppHeader from './components/AppHeader';
 import SearchPanel from './components/SearchPanel';
 import AddItem from './components/AddItem'
+import ItemStatusFilter from './components/ItemStatusFilter'
+
 import './App.css'
 
 export default class App extends Component {
@@ -32,10 +34,9 @@ export default class App extends Component {
 		this.maxId = 100;
 
 		this.state = {
-			todoData: [
-
-			],
+			todoData: [],
 			tern: '',
+			filter: 'all'// can be 'active' 'done' 'all'
 		};
 
 		this.deleteItem = (id) => {
@@ -78,25 +79,44 @@ export default class App extends Component {
 			if (tern.length === 0) return items;
 			return items.filter((item) => item.label.toLowerCase().indexOf(tern.toLowerCase()) > -1)
 		}
+
 		this.onSearchChange = (tern) => {
 			this.setState({ tern });
 		}
+		this.onFilterChange = (filter) => {
+			this.setState({ filter });
+		}
 
+		this.filterItems = (items, filter) => {
+			switch (filter) {
+				case 'all': return items;
+				case 'active': return items.filter((item) => !item.done);
+				case 'done': return items.filter((item) => item.done);
+				default: return items;
+			}
+		}
 	};
 
 
 
 
 	render() {
-		const { todoData, tern } = this.state;
-		const visibleItems = this.searchItem(todoData, tern)
+		const { todoData, tern, filter } = this.state;
+		const visibleItems = this.filterItems(
+			this.searchItem(todoData, tern), filter
+		)
+
+
 		const doneCount = todoData.filter((el) => el.done).length;
 		const todoCount = todoData.length - doneCount;
 
 		return (
 			<div className='app' >
 				<AppHeader toDo={todoCount} done={doneCount} />
-				<SearchPanel onSearchChange={this.onSearchChange} />
+				<div className='search-panel'>
+					<SearchPanel onSearchChange={this.onSearchChange} />
+					<ItemStatusFilter filter={filter} onFilterChange={this.onFilterChange} />
+				</div >
 				<TodoList
 					todos={visibleItems}
 					onDeleted={this.deleteItem}
@@ -104,6 +124,8 @@ export default class App extends Component {
 					onToggleDone={this.onToggleDone} />
 
 				<AddItem onItemAdded={this.addItem} />
+
+
 			</div>
 		)
 	}

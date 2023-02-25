@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import './SearchPanel.css'
-import ItemStatusFilter from '../ItemStatusFilter'
 
 
 
@@ -24,7 +23,6 @@ export default class SearchPanel extends Component {
 					value={this.state.tern}
 					onChange={this.onSearchChange}
 				/>
-				<ItemStatusFilter />
 			</div>
 		)
 	}
